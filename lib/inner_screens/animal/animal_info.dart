@@ -3,8 +3,9 @@ import 'package:areen/consts/colors.dart';
 import 'package:areen/inner_screens/animal/virtual_real.dart';
 import 'package:flutter/material.dart';
 import '../../consts/consts_methods.dart';
-
+import 'package:assets_audio_player/assets_audio_player.dart';
 class AnimalInfo extends StatelessWidget {
+  final assetsAudioPlayer = AssetsAudioPlayer();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +77,10 @@ class AnimalInfo extends StatelessWidget {
                               const Spacer(),
                               IconButton(
                                 onPressed: () {
-
+                                  assetsAudioPlayer.open(
+                                    Audio("assets/sounds/cammel sound.mp3"),
+                                  );
+                                  assetsAudioPlayer.play();
                                 },
                                 icon: const Icon(
                                   Icons.volume_down_rounded,
@@ -120,7 +124,6 @@ class AnimalInfo extends StatelessWidget {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
