@@ -13,12 +13,12 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller = Completer();
   static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 15,
+    target: LatLng(24.675470896113055, 46.73753865337133),
+    zoom: 17,
   );
   static CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
+      target: LatLng(24.675626882472198, 46.73753865337133),
       tilt: 59.440717697143555,
       zoom: 19.151926040649414);
 
@@ -44,14 +44,9 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     createMarker(context);
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
         title: Text(
           'خريطه عرين',
-          style: styleText(
-            color: Colors.black,
-          ),
         ),
         centerTitle: true,
         elevation: 0,
@@ -108,7 +103,7 @@ class _MapScreenState extends State<MapScreen> {
                       });
                 }),
             icon: customIcon,
-            position: const LatLng(37.43296265331129, -122.08832357078792),
+            position: const LatLng(24.675626882472198, 46.73753865337133),
           )
         },
         mapType: MapType.normal,

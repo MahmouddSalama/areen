@@ -2,7 +2,6 @@ import 'package:areen/compponents/auth_button.dart';
 import 'package:areen/inner_screens/animal/animal_info.dart';
 import 'package:flutter/material.dart';
 
-import '../compponents/text_field.dart';
 import '../consts/colors.dart';
 import '../consts/consts_methods.dart';
 class Camera extends StatelessWidget {
@@ -11,10 +10,7 @@ class Camera extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade300,
-        title: Text('الحيوانات',style: styleText(
-          color: Colors.black,
-        ),),
+        title: Text('الحيوانات'),
         centerTitle: true,
         elevation: 0,
       ),

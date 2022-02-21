@@ -19,13 +19,8 @@ class _QuestionnaireState extends State<Questionnaire> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
         title: Text(
           'استبيان',
-          style: styleText(
-            color: Colors.black,
-          ),
         ),
         centerTitle: true,
         elevation: 0,
@@ -33,6 +28,7 @@ class _QuestionnaireState extends State<Questionnaire> {
       body: Center(
         child: Column(
           children: [
+            SizedBox(height: 20,),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
               child: RegisterTextFiled(

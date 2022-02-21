@@ -9,7 +9,7 @@ final  title;
  final TextEditingController? textEditingController;
  final TextInputType? textInputType;
 
-  const TicketsField({Key? key,required this.title,required this.hint,required this.enable, this.textEditingController, this.textInputType=TextInputType.number}) : super(key: key);
+   TicketsField({Key? key,required this.title,required this.hint,required this.enable, this.textEditingController, this.textInputType=TextInputType.number}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,9 +17,16 @@ final  title;
       children: [
         Text(title),
         Container(
+          decoration: BoxDecoration(
+              color: const Color(0xffF3F3F2),
+            border: Border.all(
+              color: Colors.grey
+            ),
+            borderRadius: BorderRadius.circular(8)
+          ),
           width: getSize(context).width,
           height: 50,
-          color: const Color(0xffF3F3F2),
+
           child: TextFormField(
             controller: textEditingController,
             enabled: enable,

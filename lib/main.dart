@@ -1,3 +1,4 @@
+import 'package:areen/consts/colors.dart';
 import 'package:areen/screens/auth/entry_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,6 +10,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Kmaincolor
+        )
+      ),
       localizationsDelegates:const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

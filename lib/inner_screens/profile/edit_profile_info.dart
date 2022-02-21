@@ -1,3 +1,4 @@
+import 'package:areen/consts/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../compponents/auth_button.dart';
@@ -16,15 +17,8 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black
-        ),
-        backgroundColor: Colors.white,
         title: Text(
           'تحرير المعلومات الشخصيه',
-          style: styleText(
-            color: Colors.black,
-          ),
         ),
         centerTitle: true,
         elevation: 0,
@@ -33,40 +27,42 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                RegisterTextFiled(title: 'الاسم',
-                    validetor: (v){
-                      if (v
-                          .toString()
-                          .isEmpty ) {
-                        return 'من فضلك ادخل  الاسم صحيح';
-                      }
-                    }),
-                RegisterTextFiled(title: 'الاميل', validetor: (v){
-                  if (v
-                      .toString()
-                      .isEmpty || !v
-                      .toString()
-                      .contains("@")) {
-                    return 'من فضلك ادخل اميل صحيح';
-                  }
-                }),
-                RegisterTextFiled(title: 'كلمة المرور', validetor: (v){
-                  if (v
-                      .toString()
-                      .isEmpty || v
-                      .toString()
-                      .length < 7) {
-                    return 'كلمة المرور يجب ان لا تقل عن سبع حروف';
-                  }
-                },
-                    isPass: true),
-                AuthButton(title: 'حفظ التعديلات', function: (){_submit(context);
-                },color: Color(0xff40CE71),)
-              ],
+          child: SingleChildScrollView(
+            child: Center(
+              child: Column(
+                children: [
+                  SizedBox(height: getSize(context).height*.14,),
+                  RegisterTextFiled(title: 'الاسم',
+                      validetor: (v){
+                        if (v
+                            .toString()
+                            .isEmpty ) {
+                          return 'من فضلك ادخل  الاسم صحيح';
+                        }
+                      }),
+                  RegisterTextFiled(title: 'الاميل', validetor: (v){
+                    if (v
+                        .toString()
+                        .isEmpty || !v
+                        .toString()
+                        .contains("@")) {
+                      return 'من فضلك ادخل اميل صحيح';
+                    }
+                  }),
+                  RegisterTextFiled(title: 'كلمة المرور', validetor: (v){
+                    if (v
+                        .toString()
+                        .isEmpty || v
+                        .toString()
+                        .length < 7) {
+                      return 'كلمة المرور يجب ان لا تقل عن سبع حروف';
+                    }
+                  },
+                      isPass: true),
+                  AuthButton(title: 'حفظ التعديلات', function: (){_submit(context);
+                  },color:Kmaincolor,)
+                ],
+              ),
             ),
           ),
         ),

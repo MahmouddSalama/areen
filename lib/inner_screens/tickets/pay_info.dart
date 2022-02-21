@@ -1,3 +1,4 @@
+import 'package:areen/consts/colors.dart';
 import 'package:areen/inner_screens/tickets/view_ticket_info.dart';
 import 'package:flutter/material.dart';
 import '../../compponents/auth_button.dart';
@@ -8,13 +9,8 @@ class PayInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
         title: Text(
           'الدفع',
-          style: styleText(
-            color: Colors.black,
-          ),
         ),
         centerTitle: true,
         elevation: 0,
@@ -39,7 +35,7 @@ class PayInfo extends StatelessWidget {
                   ),
                   buildSizedBoxTickets(),
                   buildCircleAvatarTickets(
-                    color: Colors.green,
+                    color: Kmaincolor,
                     num: 2,
                   ),
                   buildSizedBoxTickets(),
@@ -56,14 +52,14 @@ class PayInfo extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 20),
-                     const TicketsField(
+                      TicketsField(
                         title: '',
                         textInputType: TextInputType.name,
                         enable: true,
                         hint: 'اسم صاحب البطاقه',
                         textEditingController: null),
                     const SizedBox(height: 20),
-                     const TicketsField(
+                      TicketsField(
                         title: '',
                         enable: true,
                         hint: 'رقم البطاقه',
@@ -71,7 +67,7 @@ class PayInfo extends StatelessWidget {
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children:  const [
+                      children:   [
                         Flexible(
                             child: TicketsField(
                                 title: ' ',
@@ -82,7 +78,7 @@ class PayInfo extends StatelessWidget {
                         Flexible(
                             child: TicketsField(
                                 title: '',
-                                enable: false,
+                                enable: true,
                                 hint: 'تاريخ الانتهاء',
                                 textEditingController: null)),
                       ],
@@ -90,7 +86,7 @@ class PayInfo extends StatelessWidget {
                     const SizedBox(height: 50,),
                     AuthButton(title: 'الدفع', function: (){
                       navigate(context, ViewTicketInfo());
-                    },color: Colors.green,),
+                    },color: Kmaincolor,),
                   ],
                 ),
               ),

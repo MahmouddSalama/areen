@@ -7,21 +7,24 @@ import 'package:flutter/material.dart';
 import '../../compponents/calender_events.dart';
 import '../../consts/consts_methods.dart';
 
-class ChoseTime extends StatelessWidget {
+class ChoseTime extends StatefulWidget {
+  @override
+  State<ChoseTime> createState() => _ChoseTimeState();
+}
+
+class _ChoseTimeState extends State<ChoseTime> {
   TextEditingController numOfTiket = TextEditingController(text: '0');
+
   TextEditingController money = TextEditingController();
+
+  String dropdownValue = '1';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
         title: Text(
           'اختيار التذاكر',
-          style: styleText(
-            color: Colors.black,
-          ),
         ),
         centerTitle: true,
         elevation: 0,
@@ -40,7 +43,7 @@ class ChoseTime extends StatelessWidget {
                 children: [
                   buildSizedBoxTickets(),
                   buildCircleAvatarTickets(
-                    color: Colors.green,
+                    color: Kmaincolor,
                     num: 1,
                   ),
                   buildSizedBoxTickets(),
@@ -61,22 +64,46 @@ class ChoseTime extends StatelessWidget {
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Flexible(
-                        child: TicketsField(
-                            title: 'عدد التذاكر',
-                            enable: true,
-                            hint: '##',
-                            textEditingController: numOfTiket)),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey
+                        ),
+                          color: const Color(0xffF3F3F2),
+                        borderRadius: BorderRadius.circular(8)
+                      ),
+                      width: getSize(context).width,
+                      child: DropdownButton<String>(
+                        value: dropdownValue,
+                        isExpanded: true,
+                        icon: const Icon(Icons.arrow_downward),
+                        elevation: 16,
+                        style: const TextStyle(color:Colors.black),
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            dropdownValue = newValue!;
+                          });
+                        },
+                        items: <String>['1', '2', '3', '4','5', '6', '7', '8','9','10']
+                            .map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ),
                     const SizedBox(width: 30),
-                    Flexible(
-                        child: TicketsField(
-                            title: 'المجموع',
-                            enable: false,
-                            hint: '${int.parse(numOfTiket.text) * 10}ر.س',
-                            textEditingController: money)),
+                    TicketsField(
+                        title: 'المجموع',
+                        enable: false,
+                        hint: '${int.parse(dropdownValue) * 10}  ر.س ',
+                        textEditingController: money),
                   ],
                 ),
               ),
@@ -86,7 +113,7 @@ class ChoseTime extends StatelessWidget {
                 function: () {
                   navigate(context, PayInfo());
                 },
-                color: Colors.green,
+                color: Kmaincolor,
               ),
             ],
           ),

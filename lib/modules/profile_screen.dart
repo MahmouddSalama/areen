@@ -1,7 +1,7 @@
 import 'package:areen/consts/consts_methods.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../inner_screens/profile/edit_profile_info.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../inner_screens/profile/game.dart';
 import '../inner_screens/profile/my_tickets.dart';
@@ -11,17 +11,13 @@ class Profilescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+       title:  Text('الملف الشخصي',),
+      ),
       body: Center(
         child: Column(
           children: [
-            SizedBox(
-              height: getSize(context).height * .1,
-            ),
-            Text('الملف الشخصي',
-                style: GoogleFonts.almarai(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black)),
             const SizedBox(height: 10),
             buildGestureDetectorProfile(context,
                 title: 'تحرير الملف الشخصي',
@@ -31,19 +27,19 @@ class Profilescreen extends StatelessWidget {
                 }),
             buildGestureDetectorProfile(context,
                 title: 'تذاكري',
-                icon: Icons.airplane_ticket_outlined,
+                icon: FontAwesomeIcons.ticketAlt,
                 function: () {
                   navigate(context,MyTickets());
                 }),
             buildGestureDetectorProfile(context,
                 title: 'العب مع عرين',
-                icon: Icons.videogame_asset,
+                icon: FontAwesomeIcons.gamepad,
                 function: () {
                   navigate(context,Game());
                 }),
             buildGestureDetectorProfile(context,
                 title: 'اخبرمنا عن زيارتك',
-                icon: Icons.messenger,
+                icon: FontAwesomeIcons.comment,
                 function: () {
                   navigate(context,Questionnaire());
                 }),

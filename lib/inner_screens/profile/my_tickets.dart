@@ -6,14 +6,8 @@ class MyTickets extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
         title: Text(
           'تذاكري',
-          style: styleText(
-            fontSize: 30,
-            color: Colors.black,
-          ),
         ),
         centerTitle: true,
         elevation: 0,

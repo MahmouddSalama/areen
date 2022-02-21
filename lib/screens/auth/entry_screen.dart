@@ -27,7 +27,7 @@ class EntryScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: getSize(context).height * .2,
+                    height: getSize(context).height * .3,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -35,12 +35,13 @@ class EntryScreen extends StatelessWidget {
                     child: SizedBox(
                       width: 300,
                       child: Text(
-                        ' اهلا بك في تطبيق عرين كيف تود الاستمرار ؟ ',
+                        ' اهلا بك في تطبيق عرين\n\n كيف تود الاستمرار ؟ ',
                         style: styleText(),
                         textAlign: TextAlign.center,
                       ),
                     ),
                   ),
+                 const SizedBox(height: 10,),
                   AuthButton(
                       title: 'زائر جديد',
                       function: () {

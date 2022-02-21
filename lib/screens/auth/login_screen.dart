@@ -6,12 +6,12 @@ import 'package:areen/screens/auth/register_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../compponents/auth_button.dart';
 import '../../layout/main_layout.dart';
 class LoginScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
@@ -59,9 +59,9 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10,),
-                DefaultTextField(
-                  iconData: Icons.email,
-                  validetor: (v){
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                  child: RegisterTextFiled(title: 'الاميل', validetor: (v){
                     if (v
                         .toString()
                         .isEmpty || !v
@@ -69,21 +69,19 @@ class LoginScreen extends StatelessWidget {
                         .contains("@")) {
                       return 'من فضلك ادخل اميل صحيح';
                     }
-                  },
+                  }),
                 ),
-                const SizedBox(height: 30,),
-                DefaultTextField(
-                  iconData: Icons.lock,
-                  validetor: (v){
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
+                  child: RegisterTextFiled(title: 'كلمة المرور', validetor: (v){
                     if (v
                         .toString()
-                        .isEmpty || v
+                        .isEmpty || !v
                         .toString()
-                        .length < 7) {
-                      return 'كلمة المرور يجب ان لا تقل عن سبع حروف';
+                        .contains("@")) {
+                      return 'من فضلك ادخل اميل صحيح';
                     }
-                  },
-                  isPass: true,
+                  }),
                 ),
                 buildRichText(function: (){
                   navigate(context, RegisterScreen());
@@ -111,24 +109,9 @@ class LoginScreen extends StatelessWidget {
                  ),
                ),
                 const SizedBox(height: 20,),
-                GestureDetector(
-                  onTap: (){
-                    navigate(context, MainLayOut());
-                  },
-                  child: Container(
-                    width: 250,
-                    height: 50,
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Color(0xff74D7A0),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text('تسجيل دخول',style: styleText(
-                      color: Colors.white,
-
-                    ),),
-                  ),
-                ),
+                AuthButton(title: 'تسجيل', function: (){
+                  navigate(context, MainLayOut());
+                },color:Kmaincolor,)
               ],
             ),
           ),

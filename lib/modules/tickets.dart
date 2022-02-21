@@ -20,10 +20,7 @@ class _TiketsState extends State<Tikets> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text('الاوقات المتاحة',style: styleText(
-          color: Colors.black,
-        ),),
+        title: Text('الاوقات المتاحة',),
         centerTitle: true,
         elevation: 0,
       ),
@@ -35,7 +32,6 @@ class _TiketsState extends State<Tikets> {
                CalenderEvents(getDay: (v){
                print(v.toString());
                }),
-
               const SizedBox(height: 20,),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -74,7 +70,7 @@ class _TiketsState extends State<Tikets> {
               AuthButton(title: 'حجز', function: (){
                 navigate(context, ChoseTime());
                 // go to
-              },color: Color(0xff00D365),)
+              },color: Kmaincolor)
             ],
           ),
         ),

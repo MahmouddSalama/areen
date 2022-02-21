@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import '../compponents/auth_button.dart';
 import 'colors.dart';
 
@@ -21,8 +22,9 @@ Size getSize(context){
  // routing to screen
 void navigate(context, scaffold){
 
-   Navigator.push(context, MaterialPageRoute(
-     builder: (context)=>scaffold,
+   Navigator.push(context, PageTransition(
+     child: scaffold,
+     type: PageTransitionType.rightToLeft
    ));
  }
 
@@ -64,11 +66,12 @@ GestureDetector buildGestureDetectorProfile(BuildContext context,{required Strin
             borderRadius: BorderRadius.circular(20),
           ),
           width: getSize(context).width,
-          height: 55,
+          height: 60,
+          alignment: Alignment.center,
           child:
           Row(
             children: [
-              Icon(icon,color: Colors.black,size: 30,),
+              Icon(icon,color: Colors.grey,size: 30,),
               const SizedBox(width: 20,),
               Text(title,style: styleText(
                   color: Colors.black,
@@ -76,6 +79,7 @@ GestureDetector buildGestureDetectorProfile(BuildContext context,{required Strin
               ),),
               const Spacer(),
               const Icon(Icons.arrow_back,color: Colors.black,textDirection: TextDirection.ltr,),
+              SizedBox(width: 20,)
             ],
           ),
         ),
@@ -155,7 +159,7 @@ AlertDialog alertDialogConfirmEdit(c) {
  // item of teckets in tecets screen
 Padding buildPaddingTickets(BuildContext context,{required String title,required String date,required Function function}) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 5),
     child: Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
@@ -165,7 +169,7 @@ Padding buildPaddingTickets(BuildContext context,{required String title,required
         onTap: ()=>function(),
         child: Container(
           width: getSize(context).width,
-          height: 80,
+          height: 75,
           decoration: BoxDecoration(
             color: Kmaincolor,
             borderRadius: BorderRadius.circular(10),
@@ -180,18 +184,19 @@ Padding buildPaddingTickets(BuildContext context,{required String title,required
                 children: [
                   Text(title,style: GoogleFonts.almarai(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: 25,
                       fontWeight: FontWeight.w700
                   ),),
                   const SizedBox(height: 5,),
                   Text(date,style: GoogleFonts.almarai(
                       color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 15,
                       fontWeight: FontWeight.w400
                   ),)
                 ],
               ),
-              Icon(Icons.arrow_back_rounded,textDirection: TextDirection.ltr,size: 50,color: Colors.white,)
+              SizedBox(width: 50,),
+              Icon(Icons.arrow_back_rounded,textDirection: TextDirection.ltr,size: 30,color: Colors.white,)
             ],
           ),
         ),
@@ -204,86 +209,89 @@ Padding buildPaddingTickets(BuildContext context,{required String title,required
 AlertDialog buildAlertDialogTicketInfo(BuildContext context) {
   return AlertDialog(
     shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20)),
-    backgroundColor: Kmaincolor,
+        borderRadius: BorderRadius.circular(10)),
     contentPadding: EdgeInsets.zero,
     content: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: SizedBox(
         height: 400,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20, vertical: 10),
-                child: Text(
-                  'تذاكري',
-                  style: styleText(
-                    fontSize: 30,
-                    color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 10),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      'حديقه حيوان الرياض',
+                      style: styleText(
+                        fontSize: 22,
+                        color: Kmaincolor,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-            const Divider(
-              color: Colors.black,
-              thickness: 2,
-            ),
-            Text(
-              'التاريخ : 9/12/2021',
-              style: styleText(
-                fontSize: 25,
-                color: Colors.white,
+              const Divider(
+                color: Colors.grey,
+                thickness: 1,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'الوقت : 9:00ص-5:00م',
-              style: styleText(
-                fontSize: 25,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              'عدد التذاكر: 5',
-              style: styleText(
-                fontSize: 25,
-                color: Colors.white,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: SizedBox(
-                width: 100,
-                height: 100,
-                child: Image.network(
-                  'https://gray-kwch-prod.cdn.arcpublishing.com/resizer/LEO4ofps-J5a3E9tFke4IJqgoe4=/800x0/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/5A4FDMHJQVDCDDCUUUMVFQEZT4.png',
-                  fit: BoxFit.fill,
+              SizedBox(height: 10,),
+              Text(
+                'التاريخ : 9/12/2021',
+                style: styleText(
+                    fontSize: 20,
+                    color: Colors.black
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Center(
-              child: FloatingActionButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                backgroundColor: KbuttonColor,
-                child: const Icon(Icons.clear),
+              const SizedBox(
+                height: 10,
               ),
-            ),
-          ],
+              Text(
+                'الوقت : 9:00ص-5:00م',
+                style: styleText(
+                  fontSize: 20,
+                  color: Colors.black
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                'عدد التذاكر: 5',
+                style: styleText(
+                    fontSize: 20,
+                    color: Colors.black
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.network(
+                    'https://gray-kwch-prod.cdn.arcpublishing.com/resizer/LEO4ofps-J5a3E9tFke4IJqgoe4=/800x0/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/5A4FDMHJQVDCDDCUUUMVFQEZT4.png',
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+             Padding(
+               padding: const EdgeInsets.symmetric(horizontal: 20),
+               child: AuthButton(title: 'إغلاق', function: (){
+                 Navigator.pop(context);
+               }),
+             )
+            ],
+          ),
         ),
       ),
     ),

@@ -1,3 +1,4 @@
+import 'package:areen/consts/colors.dart';
 import 'package:flutter/material.dart';
 
 import '../../consts/consts_methods.dart';
@@ -6,13 +7,8 @@ class ViewTicketInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black),
-        backgroundColor: Colors.white,
         title: Text(
           'عرض التذاكر',
-          style: styleText(
-            color: Colors.black,
-          ),
         ),
         centerTitle: true,
         elevation: 0,
@@ -43,7 +39,7 @@ class ViewTicketInfo extends StatelessWidget {
                   ),
                   buildSizedBoxTickets(),
                   buildCircleAvatarTickets(
-                    color:  Colors.green,
+                    color:  Kmaincolor,
                     num: 3,
                   ),
                   buildSizedBoxTickets()

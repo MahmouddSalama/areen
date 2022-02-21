@@ -62,14 +62,13 @@ class _CalenderEventsState extends State<CalenderEvents> {
       width: getSize(context).width,
       height: 325,
       decoration: const BoxDecoration(
-          color: Kmaincolor,
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))
       ),
       child:  Calendar(
         startOnMonday: true,
-        selectedColor: Colors.green,
-        todayColor: Colors.white,
-        eventColor: Colors.green,
+        selectedColor: Kmaincolor,
+        todayColor: Colors.black,
+        eventColor: Colors.white,
         eventDoneColor: Colors.amber,
         bottomBarColor: Colors.white,
         onDateSelected: (date)=>widget.getDay(date),
@@ -77,7 +76,7 @@ class _CalenderEventsState extends State<CalenderEvents> {
         isExpanded: true,
         dayOfWeekStyle: const TextStyle(
           fontSize: 15,
-          color: Colors.white,
+          color: Colors.black,
         ),
         bottomBarTextStyle: const TextStyle(
           color: Colors.white,
