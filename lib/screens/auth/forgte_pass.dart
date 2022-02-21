@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 import '../../consts/colors.dart';
 
 class ForgetPass extends StatelessWidget {
+  final TextEditingController email=TextEditingController();
+  final TextEditingController pass=TextEditingController();
+  final TextEditingController name=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +24,7 @@ class ForgetPass extends StatelessWidget {
           child: Column(
             children: [
               SizedBox(height: getSize(context).height*.1,),
-              RegisterTextFiled(title: 'البريد الاكتروني', validetor:(v){} ),
+              RegisterTextFiled(title: 'البريد الاكتروني', validetor:(v){},textEditingController: email),
               AuthButton(title:  " تاكيد البريد الاكتروني ", function: (){})
             ],
           ),

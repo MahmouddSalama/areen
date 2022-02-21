@@ -27,6 +27,13 @@ void navigate(context, scaffold){
      type: PageTransitionType.rightToLeft
    ));
  }
+void navigateReplace(context, scaffold){
+
+  Navigator.pushReplacement(context, PageTransition(
+      child: scaffold,
+      type: PageTransitionType.rightToLeft
+  ));
+}
 
  // togel betwen login & signup
 RichText buildRichText({required Function function}) {
@@ -383,6 +390,25 @@ Padding buildPaddingTitleOfSteps(BuildContext context) {
         Text('اختيار التذاكر'),
         Text('الدفع'),
         Text('عرض التذاكر'),
+      ],
+    ),
+  );
+}
+ showErrorDialog(error,context) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text('InValid data'),
+      content: Text(
+        error,
+        style: TextStyle(fontSize: 18, color: Colors.red),
+      ),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('ok'))
       ],
     ),
   );

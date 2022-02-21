@@ -14,7 +14,7 @@ class _MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller = Completer();
   static final CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(24.675470896113055, 46.73753865337133),
-    zoom: 17,
+    zoom: 17.5,
   );
   static CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
@@ -25,13 +25,15 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
+    createMarker(context);
   }
 
   createMarker(context) {
+
     if (customIcon == null) {
       ImageConfiguration configuration = createLocalImageConfiguration(context);
       BitmapDescriptor.fromAssetImage(
-              configuration, 'assets/image/yreklive_1.png')
+              configuration, 'assets/image/yreklive_1.png',)
           .then((icon) {
         setState(() {
           customIcon = icon;
@@ -45,7 +47,7 @@ class _MapScreenState extends State<MapScreen> {
     createMarker(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'خريطه عرين',
         ),
         centerTitle: true,
@@ -102,11 +104,11 @@ class _MapScreenState extends State<MapScreen> {
                         );
                       });
                 }),
-            icon: customIcon,
+           // icon: customIcon,
             position: const LatLng(24.675626882472198, 46.73753865337133),
           )
         },
-        mapType: MapType.normal,
+        mapType: MapType.satellite,
         initialCameraPosition: _kGooglePlex,
         onMapCreated: (GoogleMapController controller) {
           _controller.complete(controller);

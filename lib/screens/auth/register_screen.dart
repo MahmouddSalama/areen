@@ -3,9 +3,27 @@ import 'package:areen/compponents/auth_button.dart';
 import 'package:areen/compponents/text_field.dart';
 import 'package:areen/consts/colors.dart';
 import 'package:areen/consts/consts_methods.dart';
+import 'package:areen/layout/main_layout.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-class RegisterScreen extends StatelessWidget {
+import 'package:flutter/services.dart';
+class RegisterScreen extends StatefulWidget {
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController email=TextEditingController();
+
+  final TextEditingController pass=TextEditingController();
+
+  final TextEditingController name=TextEditingController();
+
+  bool loading = false;
+
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +39,9 @@ class RegisterScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: getSize(context).height*.1,),
-                  RegisterTextFiled(title: 'الاسم',
+                  RegisterTextFiled(
+                      textEditingController: name,
+                      title: 'الاسم',
                       validetor: (v){
                         if (v
                             .toString()
@@ -29,7 +49,9 @@ class RegisterScreen extends StatelessWidget {
                           return 'من فضلك ادخل  الاسم صحيح';
                         }
                   }),
-                  RegisterTextFiled(title: 'الاميل', validetor: (v){
+                  RegisterTextFiled(
+                      textEditingController: email,
+                      title: 'الاميل', validetor: (v){
                     if (v
                         .toString()
                         .isEmpty || !v
@@ -38,7 +60,9 @@ class RegisterScreen extends StatelessWidget {
                       return 'من فضلك ادخل اميل صحيح';
                     }
                   }),
-                  RegisterTextFiled(title: 'كلمة المرور', validetor: (v){
+                  RegisterTextFiled(
+                      textEditingController: pass,
+                      title: 'كلمة المرور', validetor: (v){
                     if (v
                         .toString()
                         .isEmpty || v
@@ -49,7 +73,7 @@ class RegisterScreen extends StatelessWidget {
                   },
                   isPass: true),
                   AuthButton(title: 'تسجيل', function: (){
-                    _submit(context);
+                    _signUp();
                   },color:Kmaincolor,)
                 ],
               ),
@@ -59,8 +83,10 @@ class RegisterScreen extends StatelessWidget {
       ),
     );
   }
+
   _submit(ctx){
-    if(_formKey.currentState!.validate()||true){
+    if(_formKey.currentState!.validate()){
+
       showDialog(context: ctx, builder: (ctx){
         return AlertDialog(
           title:  Text('تم انشاء حسابك بنجاح ',style: styleText(
@@ -77,7 +103,8 @@ class RegisterScreen extends StatelessWidget {
                   color: Colors.black54
                 ),),
                 SizedBox(height: 10,),
-                AuthButton(title: 'حسنا', function: (){
+               loading?Center(child: CircularProgressIndicator(color: Kmaincolor,),) :AuthButton(title: 'حسنا', function: (){
+                  Navigator.pop(context);
                 },color: Color(0xff40CE71),)
               ],
             ),
@@ -86,5 +113,49 @@ class RegisterScreen extends StatelessWidget {
       });
     }
 
+  }
+
+  _signUp()async{
+    String error = '';
+    if(_formKey.currentState!.validate()){
+      setState(() {
+        loading = true;
+      });
+      try {
+        UserCredential userCredential =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email.text.toLowerCase().trim(),
+          password: pass.text.trim(),
+        );
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .set({
+          'id': FirebaseAuth.instance.currentUser!.uid,
+          'name': name.text,
+          'email': email.text,
+          'createdAt': Timestamp.now(),
+          'admin': false,
+          'password':pass.text,
+        });
+        Navigator.canPop(context) ? Navigator.pop(context) : null;
+        navigateReplace(context, MainLayOut());
+      } on FirebaseAuthException catch (e) {
+        setState(() {
+          loading = false;
+        });
+        if (e.code == 'weak-password') {
+          error = 'The password provided is too weak.';
+        } else if (e.code == 'email-already-in-use') {
+          error = 'The account already exists for that email.';
+        }
+        showErrorDialog('error is${e.toString()}',context);
+      } catch (e) {
+        print(e);
+      }
+    }
+    setState(() {
+      loading = false;
+    });
   }
 }

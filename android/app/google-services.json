@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "32000266021",
+    "project_id": "areen-6cc28",
+    "storage_bucket": "areen-6cc28.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32000266021:android:ab06330e2cd73de867d4cc",
+        "android_client_info": {
+          "package_name": "com.example.areen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32000266021-6fj7kcdqkl9vqnvb34mvu36h51re3lm1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPOI1tt3ANS_W45rYCh9T5hKMR2kYaxUo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32000266021-6fj7kcdqkl9vqnvb34mvu36h51re3lm1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

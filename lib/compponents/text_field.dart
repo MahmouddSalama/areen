@@ -40,8 +40,9 @@ class RegisterTextFiled extends StatelessWidget {
   final int lines;
   final TextInputType textInputType;
   final String? Function(dynamic value) validetor;
+  final TextEditingController? textEditingController;
 
-  const RegisterTextFiled({Key? key,required this.title,required this.validetor, this.isPass=false, this.textInputType=TextInputType.emailAddress, this.lines=1}) : super(key: key);
+  const RegisterTextFiled({Key? key,required this.title,required this.validetor, this.isPass=false, this.textInputType=TextInputType.emailAddress, this.lines=1, this.textEditingController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +55,10 @@ class RegisterTextFiled extends StatelessWidget {
         cursorColor: Kmaincolor,
         validator: (v) =>validetor(v),
         obscureText: isPass,
+        controller: textEditingController,
         keyboardType: textInputType,
         decoration:  InputDecoration(
+
           label: Text(
             title,
             style: const TextStyle(fontSize: 20, color: Colors.black),
