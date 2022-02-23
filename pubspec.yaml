@@ -48,6 +48,8 @@ dependencies:
   firebase_auth: ^3.3.7
   firebase_core: ^1.8.0
   cloud_firestore: ^3.1.8
+  flutter_bloc: ^8.0.1
+  bloc: ^8.0.2
 
 
 dev_dependencies:
@@ -77,6 +79,7 @@ flutter:
     - assets/image/
     - assets/sounds/
     - assets/image/images_Areen/
+    - assets/image/marks/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,4 +1,6 @@
 import 'package:areen/consts/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../compponents/auth_button.dart';
@@ -10,6 +12,10 @@ class EditProfileInfo extends StatefulWidget {
 }
 
 class _EditProfileInfoState extends State<EditProfileInfo> {
+  final TextEditingController email = TextEditingController();
+  final TextEditingController pass = TextEditingController();
+  final TextEditingController name = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -17,7 +23,7 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'تحرير المعلومات الشخصيه',
         ),
         centerTitle: true,
@@ -25,46 +31,70 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
       ),
       body: Form(
         key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                children: [
-                  SizedBox(height: getSize(context).height*.14,),
-                  RegisterTextFiled(title: 'الاسم',
-                      validetor: (v){
-                        if (v
-                            .toString()
-                            .isEmpty ) {
-                          return 'من فضلك ادخل  الاسم صحيح';
-                        }
-                      }),
-                  RegisterTextFiled(title: 'الاميل', validetor: (v){
-                    if (v
-                        .toString()
-                        .isEmpty || !v
-                        .toString()
-                        .contains("@")) {
-                      return 'من فضلك ادخل اميل صحيح';
-                    }
-                  }),
-                  RegisterTextFiled(title: 'كلمة المرور', validetor: (v){
-                    if (v
-                        .toString()
-                        .isEmpty || v
-                        .toString()
-                        .length < 7) {
-                      return 'كلمة المرور يجب ان لا تقل عن سبع حروف';
-                    }
-                  },
-                      isPass: true),
-                  AuthButton(title: 'حفظ التعديلات', function: (){_submit(context);
-                  },color:Kmaincolor,)
-                ],
-              ),
-            ),
-          ),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance.collection('users').snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            try{
+              final docs = snapshot.data!.docs.firstWhere((element) =>element.id==FirebaseAuth.instance.currentUser!.uid);
+              email.text=docs['email'];
+              pass.text=docs['password'];
+              name.text=docs['name'];
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              else if (snapshot.hasError) {
+                return const Center(child: Text("error"));
+              }
+              else if (snapshot.hasData && snapshot.data!.docs.length != 0) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(height: getSize(context).height*.14,),
+                          RegisterTextFiled(
+                              enable: false,title: 'الاسم',
+                              validetor: (v){
+                                if (v
+                                    .toString()
+                                    .isEmpty ) {
+                                  return 'من فضلك ادخل  الاسم صحيح';
+                                }
+                              },textEditingController: name),
+                          RegisterTextFiled(enable: false,title: 'الاميل', validetor: (v){
+                            if (v
+                                .toString()
+                                .isEmpty || !v
+                                .toString()
+                                .contains("@")) {
+                              return 'من فضلك ادخل اميل صحيح';
+                            }
+                          },textEditingController: email),
+                          RegisterTextFiled(enable: false,title: 'كلمة المرور', validetor: (v){
+                            if (v
+                                .toString()
+                                .isEmpty || v
+                                .toString()
+                                .length < 7) {
+                              return 'كلمة المرور يجب ان لا تقل عن سبع حروف';
+                            }
+                          },textEditingController: pass,
+                            isPass: true,),
+                          AuthButton(title: 'حفظ التعديلات', function: (){_submit(context);
+                          },color:Kmaincolor,)
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }
+
+            }catch(e){
+
+            }
+            return Center(child: CircularProgressIndicator());
+          }
         ),
       ),
     );

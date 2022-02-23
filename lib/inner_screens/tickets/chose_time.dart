@@ -16,6 +16,7 @@ class _ChoseTimeState extends State<ChoseTime> {
   TextEditingController numOfTiket = TextEditingController(text: '0');
 
   TextEditingController money = TextEditingController();
+DateTime dateTime =DateTime.now();
 
   String dropdownValue = '1';
 
@@ -60,7 +61,12 @@ class _ChoseTimeState extends State<ChoseTime> {
                 ],
               ),
               buildPaddingTitleOfSteps(context),
-              CalenderEvents(getDay: (v) {}),
+              CalenderEvents(getDay: (v) {
+                setState(() {
+                  dateTime =v;
+                });
+                print(v);
+              }),
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -100,6 +106,7 @@ class _ChoseTimeState extends State<ChoseTime> {
                     ),
                     const SizedBox(width: 30),
                     TicketsField(
+                      validetor: (n){},
                         title: 'المجموع',
                         enable: false,
                         hint: '${int.parse(dropdownValue) * 10}  ر.س ',
@@ -111,7 +118,7 @@ class _ChoseTimeState extends State<ChoseTime> {
               AuthButton(
                 title: 'الدفع',
                 function: () {
-                  navigate(context, PayInfo());
+                  navigate(context, PayInfo(time: dateTime,numOfTicket: dropdownValue,));
                 },
                 color: Kmaincolor,
               ),
@@ -121,4 +128,5 @@ class _ChoseTimeState extends State<ChoseTime> {
       ),
     );
   }
+
 }

@@ -41,8 +41,9 @@ class RegisterTextFiled extends StatelessWidget {
   final TextInputType textInputType;
   final String? Function(dynamic value) validetor;
   final TextEditingController? textEditingController;
+  final bool enable;
 
-  const RegisterTextFiled({Key? key,required this.title,required this.validetor, this.isPass=false, this.textInputType=TextInputType.emailAddress, this.lines=1, this.textEditingController}) : super(key: key);
+  const RegisterTextFiled({Key? key,required this.title,required this.validetor, this.isPass=false, this.textInputType=TextInputType.emailAddress, this.lines=1, this.textEditingController,this.enable=true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +52,7 @@ class RegisterTextFiled extends StatelessWidget {
       height: 100,
 
       child: TextFormField(
+        enabled: enable,
         maxLines:lines,
         cursorColor: Kmaincolor,
         validator: (v) =>validetor(v),
@@ -69,6 +71,9 @@ class RegisterTextFiled extends StatelessWidget {
           errorBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.red, width: 2),
       ),
+          disabledBorder:const OutlineInputBorder(
+            borderSide: BorderSide(color: Kmaincolor, width: 2),
+          ) ,
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Kmaincolor, width: 2),
           ),

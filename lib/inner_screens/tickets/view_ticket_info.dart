@@ -1,4 +1,6 @@
 import 'package:areen/consts/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../consts/consts_methods.dart';
@@ -49,11 +51,32 @@ class ViewTicketInfo extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              buildAlertDialogTicketInfo(context),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance.collection('tickets').snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    try{
+                      final docs = snapshot.data!.docs.firstWhere((element) =>element['user id']==FirebaseAuth.instance.currentUser!.uid);
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      else if (snapshot.hasError) {
+                        return const Center(child: Text("error"));
+                      }
+                      else if (snapshot.hasData && snapshot.data!.docs.length != 0) {
+                        return buildAlertDialogTicketInfo(context,num: docs['numofTickets'],date: docs['date'].toDate());
+                      }
+
+                    }catch(e){
+
+                    }
+                    return Center(child: CircularProgressIndicator(color: Kmaincolor,));
+                  }
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
 }

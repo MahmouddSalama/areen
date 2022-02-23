@@ -35,7 +35,7 @@ List Screens=[
       bottomNavigationBar:  CurvedNavigationBar(
         color: Kmaincolor,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      items: <Widget>[
+      items: const <Widget>[
         Icon(Icons.person, size: 25,color: Colors.white,),
         Icon(FontAwesomeIcons.ticketAlt, size: 25,color: Colors.white,),
         Icon(Icons.camera_alt, size: 25,color: Colors.white,),

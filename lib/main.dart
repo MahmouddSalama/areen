@@ -1,4 +1,5 @@
 import 'package:areen/consts/colors.dart';
+import 'package:areen/screens/auth/auth_stste/auth_state.dart';
 import 'package:areen/screens/auth/entry_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
       ],
       locale: const Locale("ar", "IR") ,
       debugShowCheckedModeBanner: false,
-      home: EntryScreen(),
+      home: AuthState(),
     );
   }
 }

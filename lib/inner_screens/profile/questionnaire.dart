@@ -48,11 +48,15 @@ class _QuestionnaireState extends State<Questionnaire> {
             buildRow(
                 title:
                     '1- بالنظر الي تجربتك لتطبيق عرين ما مدي ان توصي به لصيق او قريب ؟ ',
-                groupValue: groupValue1),
+                groupValue: groupValue1,
+              row: 1
+             ),
             buildRow(
+                row: 2,
                 title: '2- ما مدي سهوله استخدام التطبيق ؟ ',
                 groupValue: groupValue2),
             buildRow(
+                row: 3,
                 title: '3- ما هو تقسمك لجوده المعلومات في تطبيق عريم ؟',
                 groupValue: groupValue3),
            const  SizedBox(height: 20,),
@@ -74,7 +78,7 @@ class _QuestionnaireState extends State<Questionnaire> {
     );
   }
 
-  Row buildRow({required title, required int groupValue}) {
+  Row buildRow({required title, required int groupValue,required int row}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -87,16 +91,16 @@ class _QuestionnaireState extends State<Questionnaire> {
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
         )),
-        buildColumn(title: "ممتاز", va: 1, groupValue: groupValue),
-        buildColumn(title: "متوسط", va: 2, groupValue: groupValue),
-        buildColumn(title: "ضعيف", va: 3, groupValue: groupValue),
+        buildColumn(title: "ممتاز", va: 1, groupValue: groupValue,row: 1),
+        buildColumn(title: "متوسط", va: 2, groupValue: groupValue,row: 2),
+        buildColumn(title: "ضعيف", va: 3, groupValue: groupValue,row:3),
 
       ],
     );
   }
 
   Column buildColumn(
-      {required title, required int va, required int groupValue}) {
+      {required title, required int va, required int groupValue,required int row}) {
     return Column(
       children: [
         Text(
@@ -109,8 +113,9 @@ class _QuestionnaireState extends State<Questionnaire> {
           groupValue: groupValue,
           onChanged: (v) {
             setState(() {
-              groupValue = int.parse(v.toString());
-              print(groupValue);
+              if(row ==1)
+              groupValue1 = int.parse(v.toString());
+              print(groupValue1);
             });
           },
         ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,6 +28,7 @@ void navigate(context, scaffold){
      type: PageTransitionType.rightToLeft
    ));
  }
+
 void navigateReplace(context, scaffold){
 
   Navigator.pushReplacement(context, PageTransition(
@@ -213,7 +215,7 @@ Padding buildPaddingTickets(BuildContext context,{required String title,required
 }
 
  // AlertDialog of info teckets
-AlertDialog buildAlertDialogTicketInfo(BuildContext context) {
+AlertDialog buildAlertDialogTicketInfo(BuildContext context,{required DateTime date,required num }) {
   return AlertDialog(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10)),
@@ -249,7 +251,7 @@ AlertDialog buildAlertDialogTicketInfo(BuildContext context) {
               ),
               SizedBox(height: 10,),
               Text(
-                'التاريخ : 9/12/2021',
+                'التاريخ  ${date.year}/${date.month}/${date.day}',
                 style: styleText(
                     fontSize: 20,
                     color: Colors.black
@@ -269,7 +271,7 @@ AlertDialog buildAlertDialogTicketInfo(BuildContext context) {
                 height: 10,
               ),
               Text(
-                'عدد التذاكر: 5',
+                'عدد التذاكر: ${num}',
                 style: styleText(
                     fontSize: 20,
                     color: Colors.black
@@ -394,6 +396,7 @@ Padding buildPaddingTitleOfSteps(BuildContext context) {
     ),
   );
 }
+
  showErrorDialog(error,context) {
   showDialog(
     context: context,
@@ -413,3 +416,5 @@ Padding buildPaddingTitleOfSteps(BuildContext context) {
     ),
   );
 }
+
+//
