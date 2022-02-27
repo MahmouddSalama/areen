@@ -320,7 +320,7 @@ AlertDialog buildAlertDialogAnswers(title,context) {
             style: const TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
-                color: Colors.green),
+                color: Colors.red),
           ),
           FloatingActionButton.small(
             onPressed: () {

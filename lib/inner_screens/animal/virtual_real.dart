@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../consts/consts_methods.dart';
 class VirtualReal extends StatelessWidget {
+  final String image;
+  const VirtualReal({Key? key,required this.image}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +27,7 @@ class VirtualReal extends StatelessWidget {
             height: getSize(context).height,
             width: getSize(context).width,
             child: Image.network(
+
               "https://www.marylandzoo.org/wp-content/uploads/2017/12/osage-orange.jpg",
               fit: BoxFit.fill,
             ),
@@ -34,7 +38,7 @@ class VirtualReal extends StatelessWidget {
               height: getSize(context).height*.5,
               width: getSize(context).width,
               child: Image.asset(
-                "assets/image/cammel.png",
+                image,
                 fit: BoxFit.fill,
               ),
             ),

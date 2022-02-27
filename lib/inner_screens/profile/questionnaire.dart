@@ -25,60 +25,63 @@ class _QuestionnaireState extends State<Questionnaire> {
         centerTitle: true,
         elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: 20,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-              child: RegisterTextFiled(
-                title: 'العمر',
-                validetor: (v) {
-                  if (v.toString().isEmpty) {
-                    return 'ادخل رقم صحيح';
-                  }
-                },
-                textInputType: TextInputType.number,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                child: RegisterTextFiled(
+                  title: 'العمر',
+                  validetor: (v) {
+                    if (v.toString().isEmpty) {
+                      return 'ادخل رقم صحيح';
+                    }
+                  },
+                  textInputType: TextInputType.number,
+                ),
               ),
-            ),
-            const Divider(
-              color: Colors.black,
-              thickness: 2,
-            ),
-            buildRow(
-                title:
-                    '1- بالنظر الي تجربتك لتطبيق عرين ما مدي ان توصي به لصيق او قريب ؟ ',
-                groupValue: groupValue1,
-              row: 1
-             ),
-            buildRow(
-                row: 2,
-                title: '2- ما مدي سهوله استخدام التطبيق ؟ ',
-                groupValue: groupValue2),
-            buildRow(
-                row: 3,
-                title: '3- ما هو تقسمك لجوده المعلومات في تطبيق عريم ؟',
-                groupValue: groupValue3),
-           const  SizedBox(height: 20,),
-            Text('اقتراحك',style: styleText(
-              fontSize: 30,
-              color: Colors.black
-            ),),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: RegisterTextFiled(title: '', validetor: (v){},lines: 4,textInputType: TextInputType.text,),
-            ),
-            const  SizedBox(height: 20,),
-            AuthButton(title: 'حفظ', function: (){
-              //
-            })
-          ],
+              const Divider(
+                color: Colors.black,
+                thickness: 2,
+              ),
+              buildRow(
+                  title:
+                      '1- بالنظر الي تجربتك لتطبيق عرين ما مدي ان توصي به لصيق او قريب ؟ ',
+                  groupValue: groupValue1,
+                row: 1,
+                x: 0
+               ),
+              buildRow(
+                  row: 2,
+                  title: '2- ما مدي سهوله استخدام التطبيق ؟ ',
+                  groupValue: groupValue2,x: 1),
+              buildRow(
+                  row: 3,
+                  title: '3- ما هو تقسمك لجوده المعلومات في تطبيق عريم ؟',
+                  groupValue: groupValue3,x: 2),
+             const  SizedBox(height: 20,),
+              Text('اقتراحك',style: styleText(
+                fontSize: 30,
+                color: Colors.black
+              ),),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: RegisterTextFiled(title: '', validetor: (v){},lines: 4,textInputType: TextInputType.text,),
+              ),
+              const  SizedBox(height: 20,),
+              AuthButton(title: 'حفظ', function: (){
+                //
+              })
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Row buildRow({required title, required int groupValue,required int row}) {
+  Row buildRow({required title, required int groupValue,required int row,required int x}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -91,16 +94,16 @@ class _QuestionnaireState extends State<Questionnaire> {
                 color: Colors.black, fontSize: 16, fontWeight: FontWeight.w600),
           ),
         )),
-        buildColumn(title: "ممتاز", va: 1, groupValue: groupValue,row: 1),
-        buildColumn(title: "متوسط", va: 2, groupValue: groupValue,row: 2),
-        buildColumn(title: "ضعيف", va: 3, groupValue: groupValue,row:3),
+        buildColumn(title: "ممتاز", va: 1, groupValue: groupValue,row: 1,x:x),
+        buildColumn(title: "متوسط", va: 2, groupValue: groupValue,row: 2,x: x),
+        buildColumn(title: "ضعيف", va: 3, groupValue: groupValue,row:3,x: x),
 
       ],
     );
   }
 
   Column buildColumn(
-      {required title, required int va, required int groupValue,required int row}) {
+      {required title, required int va, required int groupValue,required int row,required int x}) {
     return Column(
       children: [
         Text(
@@ -113,9 +116,17 @@ class _QuestionnaireState extends State<Questionnaire> {
           groupValue: groupValue,
           onChanged: (v) {
             setState(() {
-              if(row ==1)
-              groupValue1 = int.parse(v.toString());
+              if(x==0){
+                groupValue1 = int.parse(v.toString());
+              }
+              if(x==1){
+                groupValue2 = int.parse(v.toString());
+              }
+              if(x==2){
+                groupValue3 = int.parse(v.toString());
+              }
               print(groupValue1);
+              print(va);
             });
           },
         ),

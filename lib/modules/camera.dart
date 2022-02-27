@@ -1,10 +1,12 @@
 import 'package:areen/compponents/auth_button.dart';
 import 'package:areen/inner_screens/animal/animal_info.dart';
+import 'package:areen/models/animal/animals_data.dart';
 import 'package:flutter/material.dart';
 
 import '../consts/colors.dart';
 import '../consts/consts_methods.dart';
 class Camera extends StatelessWidget {
+  final TextEditingController id=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +25,10 @@ class Camera extends StatelessWidget {
             child: Container(
               color: Colors.white,
               child: TextFormField(
+                controller: id,
                 keyboardType: TextInputType.number,
                 decoration:  InputDecoration(
+
                   label: const Text('ادخل كود الحيوان '),
                   labelStyle: styleText(color: Colors.black,fontSize: 12),
                   border:  const OutlineInputBorder(
@@ -46,7 +50,8 @@ class Camera extends StatelessWidget {
           AuthButton(title: 'تأكيد', function: (){
             // go to animal info screen
             //....
-            navigate(context, AnimalInfo());
+            if(!id.text.isEmpty||animals.where((element) => element.id==id.text).length==1)
+            navigate(context, AnimalInfo(id:id.text,));
           })
 
         ],

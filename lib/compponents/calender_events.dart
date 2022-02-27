@@ -18,28 +18,28 @@ class _CalenderEventsState extends State<CalenderEvents> {
   final Map<DateTime,List<CleanCalendarEvent>> events = {
     DateTime (DateTime.now().year,DateTime.now().month,DateTime.now().day):
     [
-      CleanCalendarEvent('',
-          startTime: DateTime(
-              DateTime.now().year,DateTime.now().month,DateTime.now().day,10,0),
-          endTime:  DateTime(
-              DateTime.now().year,DateTime.now().month,DateTime.now().day,12,0),
-          description: 'A special event',
-          color: Colors.blue),
+      // CleanCalendarEvent('',
+      //     startTime: DateTime(
+      //         DateTime.now().year,DateTime.now().month,DateTime.now().day,10,0),
+      //     endTime:  DateTime(
+      //         DateTime.now().year,DateTime.now().month,DateTime.now().day,10,0),
+      //     description: 'A special event',
+      //     color: Colors.blue),
     ],
-    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 2):
+    DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day):
     [
-      CleanCalendarEvent('',
-          startTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day + 2, 10, 0),
-          endTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day + 2, 12, 0),
-          color: Colors.orange),
-      CleanCalendarEvent('',
-          startTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day + 2, 14, 30),
-          endTime: DateTime(DateTime.now().year, DateTime.now().month,
-              DateTime.now().day + 2, 17, 0),
-          color: Colors.pink),
+      // CleanCalendarEvent('',
+      //     startTime: DateTime(DateTime.now().year, DateTime.now().month,
+      //         DateTime.now().day + 2, 10, 0),
+      //     endTime: DateTime(DateTime.now().year, DateTime.now().month,
+      //         DateTime.now().day + 2, 12, 0),
+      //     color: Colors.orange),
+      // CleanCalendarEvent('',
+      //     startTime: DateTime(DateTime.now().year, DateTime.now().month,
+      //         DateTime.now().day + 2, 14, 30),
+      //     endTime: DateTime(DateTime.now().year, DateTime.now().month,
+      //         DateTime.now().day + 2, 17, 0),
+      //     color: Colors.pink),
     ],
   };
   void _handleData(date){
@@ -81,7 +81,7 @@ class _CalenderEventsState extends State<CalenderEvents> {
         bottomBarTextStyle: const TextStyle(
           color: Colors.white,
         ),
-        hideBottomBar: false,
+        hideBottomBar: true,
         hideArrows: false,
         weekDays: const ['الاتنين','الثلاثاء','الاربعاء','الخميس','الجمعه','السبت','الاحد'],
       ),

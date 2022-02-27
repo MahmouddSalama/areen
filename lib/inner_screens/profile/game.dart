@@ -180,7 +180,7 @@ class _GameState extends State<Game> {
                 randomNumber = randomNumber % 20;
                 num++;
                 answer=0;
-                if (num == 3) {
+                if (num == 4) {
                   Navigator.pop(context);
                   Navigator.pop(context);
                   navigate(context, FinshGame());
@@ -188,6 +188,16 @@ class _GameState extends State<Game> {
                 setState(() {});
               } else {
                 print('nop');
+                randomNumber++;
+                randomNumber = randomNumber % 20;
+                num++;
+                answer=0;
+                if (num == 4) {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  navigate(context, FinshGame());
+                }
+                setState(() {});
                 showDialog(
                     context: context,
                     builder: (context) {

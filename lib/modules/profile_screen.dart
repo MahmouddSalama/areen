@@ -1,4 +1,5 @@
 import 'package:areen/consts/consts_methods.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../inner_screens/profile/edit_profile_info.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,11 @@ class Profilescreen extends StatelessWidget {
                 }),
             const SizedBox(height: 30),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                FirebaseAuth.instance.signOut();
+                for(;Navigator.canPop(context);)
+                  Navigator.pop(context);
+              },
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
