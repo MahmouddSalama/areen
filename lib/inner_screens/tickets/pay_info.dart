@@ -88,12 +88,12 @@ class _PayInfoState extends State<PayInfo> {
                           textInputType: TextInputType.name,
                           enable: true,
                           hint: 'اسم صاحب البطاقه',
-                          textEditingController: num,
+                          textEditingController: name,
                         ),
                       const SizedBox(height: 20),
                         TicketsField(
                           validetor: (v){
-                            if(v.toString().isEmpty){
+                            if(v.toString().isEmpty||v.toString().length!=16){
                               return 'من فضلك رقم الاسم صحيح';
                             }
                           },
@@ -110,7 +110,7 @@ class _PayInfoState extends State<PayInfo> {
                           Flexible(
                               child: TicketsField(
                                 validetor: (v){
-                                  if(v.toString().isEmpty){
+                                  if(v.toString().isEmpty||v.toString().length!=3){
                                     return 'من فضلك ادخل رقم الامان صحيح';
                                   }
                                 },
@@ -122,26 +122,26 @@ class _PayInfoState extends State<PayInfo> {
                               )),
                           SizedBox(width: 30),
                           Flexible(
-                              child: GestureDetector(
-                                onTap: (){
-                                  pickedDialog(context);
-                                },
-                                child: TicketsField(
-                                  validetor: (v){
-                                    if(v.toString().isEmpty){
-                                      return 'من فضلك ادخل التاريخ صحيح';
-                                    }
-                                  },
-                                    title: '',
-                                    enable: false,
-                                    hint: 'تاريخ الانتهاء',
-                                    textEditingController: date,
-                                ),
-                              )),
+                            child: TicketsField(
+                              textInputType: TextInputType.datetime,
+                              enable: true,
+                              validetor: (v){
+
+                                if(v.toString().isEmpty||v.toString().length!=5||v.toString()[2]!='/'){
+                                  //if(int.parse(v.toString().substring(3,5))<=int.parse(DateTime.now().year.toString().substring(2,4))){
+                                    return 'من فضلك ادخل التاريخ صحيح';
+                                  //}
+                                }
+                              },
+                                title: '',
+                                hint: 'تاريخ الانتهاء',
+                                textEditingController: date,
+                            ),
+                          ),
                         ],
                       ),
                       const SizedBox(height: 50,),
-                    loading?const Center(child: CircularProgressIndicator(color: Kmaincolor,)) : AuthButton(title: 'الدفع', function: (){
+                      loading?const Center(child: CircularProgressIndicator(color: Kmaincolor,)) : AuthButton(title: 'الدفع', function: (){
                       pay();
                       },color: Kmaincolor,),
                     ],
@@ -192,7 +192,10 @@ class _PayInfoState extends State<PayInfo> {
           'money':'${int.parse(widget.numOfTicket)*10}',
           'date':widget.time,
         });
-        navigateReplace(context, ViewTicketInfo());
+        for(;Navigator.canPop(context);)
+          Navigator.pop(context);
+
+        navigate(context, ViewTicketInfo());
       } on FirebaseAuthException catch (e) {
         setState(() {
           loading = false;

@@ -1,7 +1,6 @@
 import 'package:areen/consts/colors.dart';
 import 'package:areen/models/game/quistion.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../compponents/auth_button.dart';
 import '../../consts/consts_methods.dart';
@@ -26,13 +25,13 @@ class _GameState extends State<Game> {
 
     super.initState();
   }
-
+  Color colorans=Colors.green;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'العب مع عرين',
         ),
         centerTitle: true,
@@ -59,15 +58,14 @@ class _GameState extends State<Game> {
                 children: [
                   Container(
                     width: getSize(context).width,
-                    decoration: const BoxDecoration(
-                        color: Kmaincolor,
-                        boxShadow: [
-                          BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 8,
-                              offset: Offset(0, 3),
-                          )
-                        ]),
+                    decoration:
+                        const BoxDecoration(color: Kmaincolor, boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey,
+                        blurRadius: 8,
+                        offset: Offset(0, 3),
+                      )
+                    ]),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -89,7 +87,7 @@ class _GameState extends State<Game> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Center(
@@ -104,12 +102,14 @@ class _GameState extends State<Game> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               buildGestureDetector(
-                              value: 1,
-                                image: questions[randomNumber].image1
+                                  value: 1,
+                                  image: questions[randomNumber].image1,
+                                right: questions[randomNumber].rightAnswer
                               ),
                               buildGestureDetector(
                                   value: 2,
-                                  image: questions[randomNumber].image2
+                                  image: questions[randomNumber].image2,
+                                  right: questions[randomNumber].rightAnswer
                               ),
                             ],
                           ),
@@ -117,20 +117,20 @@ class _GameState extends State<Game> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               buildGestureDetector(
+                                  right: questions[randomNumber].rightAnswer,
                                   value: 3,
-                                  image: questions[randomNumber].image3
-                              ),
+                                  image: questions[randomNumber].image3),
                               buildGestureDetector(
+                                  right: questions[randomNumber].rightAnswer,
                                   value: 4,
-                                  image: questions[randomNumber].image4
-                              ),
+                                  image: questions[randomNumber].image4),
                             ],
                           ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   buildRow1(context),
@@ -143,16 +143,16 @@ class _GameState extends State<Game> {
     );
   }
 
-  GestureDetector buildGestureDetector({required image,required int value}) {
+  GestureDetector buildGestureDetector({required image, required int value,required int  right}) {
     return GestureDetector(
       onTap: () {
-        answer=value;
-        setState(() {
-        });
+        answer = value;
+        setState(() {});
       },
       child: Container(
-        decoration:
-            BoxDecoration(border: Border.all(width: 3, color:answer==value? Colors.green:Kmaincolor)),
+        decoration: BoxDecoration(
+            border: Border.all(
+                width: 3, color: answer == value ?  answer==questions[randomNumber].rightAnswer? Colors.green:Colors.green:Kmaincolor )),
         width: 120,
         height: 120,
         child: Padding(
@@ -173,27 +173,22 @@ class _GameState extends State<Game> {
           child: AuthButton(
             title: 'التالي',
             function: () {
-              if (answer == questions[randomNumber].rightAnswer &&
-                  num < 4) {
-                print('true');
+              if (answer == questions[randomNumber].rightAnswer && num < 4) {
                 randomNumber++;
                 randomNumber = randomNumber % 20;
                 num++;
-                answer=0;
+                answer = 0;
                 if (num == 4) {
-                  Navigator.pop(context);
                   Navigator.pop(context);
                   navigate(context, FinshGame());
                 }
                 setState(() {});
               } else {
-                print('nop');
+                colorans=Colors.red;
                 randomNumber++;
                 randomNumber = randomNumber % 20;
-                num++;
-                answer=0;
+                answer = 0;
                 if (num == 4) {
-                  Navigator.pop(context);
                   Navigator.pop(context);
                   navigate(context, FinshGame());
                 }
@@ -203,6 +198,8 @@ class _GameState extends State<Game> {
                     builder: (context) {
                       return buildAlertDialogAnswers('خاطئة', context);
                     });
+                colorans=Colors.green;
+                setState(() {});
               }
             },
             color: Kmaincolor,
@@ -210,9 +207,11 @@ class _GameState extends State<Game> {
         ),
         Flexible(
           child: AuthButton(
-              title: 'خروج', function: () {
+              title: 'خروج',
+              function: () {
                 Navigator.pop(context);
-          }, color: Color(0xffFF2626)),
+              },
+              color: const Color(0xffFF2626)),
         ),
       ],
     );

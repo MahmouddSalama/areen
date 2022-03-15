@@ -98,14 +98,14 @@ GestureDetector buildGestureDetectorProfile(BuildContext context,{required Strin
 }
 
  // custom Calender
-Container buildContainerTime() {
+Container buildContainerTime({required text}) {
   return Container(
     height: 40,
     width: 150,
     color:Kmaincolor,
-    child:  const Padding(
-      padding: EdgeInsets.all(7),
-      child: Text('9ص -5م',style: TextStyle(
+    child:   Padding(
+      padding: const EdgeInsets.all(7),
+      child: Text(text,style: const TextStyle(
           color: Colors.black,
           fontSize: 18,
           fontWeight: FontWeight.bold
@@ -401,17 +401,23 @@ Padding buildPaddingTitleOfSteps(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      title: Text('InValid data'),
-      content: Text(
-        error,
-        style: TextStyle(fontSize: 18, color: Colors.red),
+      contentPadding: EdgeInsets.zero,
+      title: const Text('معلومات غير صحيحه'),
+      content: Container(
+        height: 150,
+        child: Center(
+          child: Text(
+            error,
+            style: const TextStyle(fontSize: 18, color: Colors.red),
+          ),
+        ),
       ),
       actions: [
         TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text('ok'))
+            child: const Text('نعم'))
       ],
     ),
   );

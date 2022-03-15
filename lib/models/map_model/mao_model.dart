@@ -83,6 +83,16 @@ List<MapModel> mapModelList = [
     desc: 'الدب الأسمر أو الدب البني هو نوع من الدببة، منتشر في أوروبا وآسيا وأمريكا الشمالية. ... يُمكن أن يزن من 300 إلى 780 كغم، وأكبرالانواع حجماً من الدببة البنية هي ...',
     latLng: LatLng(24.6772705881378, 46.73661810774319),
   ),
+  MapModel(
+    url: 'https://lh5.googleusercontent.com/p/AF1QipPH8SodF54qnTfliaIAPVBtAlrTbQRftunKHY08=w408-h544-k-no',
+    desc: 'مطعم زوو جريل',
+    latLng: LatLng(24.677175221196478, 46.73615825191821),
+  ),
+  MapModel(
+    url: 'https://images-eu.ssl-images-amazon.com/images/I/31J3BwzAEvL._SY300_SX300_QL70_FMwebp_.jpg',
+    desc: 'دوراه مياه',
+    latLng: LatLng(24.676939362791497, 46.73580077512835),
+  ),
   // MapModel(
   //   url: '',
   //   desc: '',

@@ -50,7 +50,6 @@ class RegisterTextFiled extends StatelessWidget {
     return SizedBox(
       width: getSize(context).width,
       height: 100,
-
       child: TextFormField(
         enabled: enable,
         maxLines:lines,
@@ -60,7 +59,6 @@ class RegisterTextFiled extends StatelessWidget {
         controller: textEditingController,
         keyboardType: textInputType,
         decoration:  InputDecoration(
-
           label: Text(
             title,
             style: const TextStyle(fontSize: 20, color: Colors.black),
@@ -78,7 +76,8 @@ class RegisterTextFiled extends StatelessWidget {
             borderSide: BorderSide(color: Kmaincolor, width: 2),
           ),
           focusedBorder: const OutlineInputBorder(
-              borderSide: BorderSide(color: Kmaincolor, width: 2)),
+              borderSide: BorderSide(color: Kmaincolor, width: 2),
+          ),
         ),
       ),
     );

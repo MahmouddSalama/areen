@@ -54,7 +54,7 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
                         children: [
                           SizedBox(height: getSize(context).height*.14,),
                           RegisterTextFiled(
-                              enable: false,title: 'الاسم',
+                              title: 'الاسم',
                               validetor: (v){
                                 if (v
                                     .toString()
@@ -62,7 +62,8 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
                                   return 'من فضلك ادخل  الاسم صحيح';
                                 }
                               },textEditingController: name),
-                          RegisterTextFiled(enable: false,title: 'الاميل', validetor: (v){
+                          RegisterTextFiled(
+                              title: 'الاميل', validetor: (v){
                             if (v
                                 .toString()
                                 .isEmpty || !v
@@ -71,7 +72,7 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
                               return 'من فضلك ادخل اميل صحيح';
                             }
                           },textEditingController: email),
-                          RegisterTextFiled(enable: false,title: 'كلمة المرور', validetor: (v){
+                          RegisterTextFiled(title: 'كلمة المرور', validetor: (v){
                             if (v
                                 .toString()
                                 .isEmpty || v
@@ -89,11 +90,10 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
                   ),
                 );
               }
-
             }catch(e){
 
             }
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         ),
       ),
@@ -104,6 +104,11 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
     if(_formKey.currentState!.validate()||true){
       showDialog(context: ctx, builder: (ctx){
         return alertDialogEditInfo(context: context,function: (){
+          FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).update({
+            'name': name.text,
+            'email': email.text,
+            'password':pass.text,
+          });
           Navigator.pop(context);
           showDialog(context: ctx, builder: (ctx){
             return alertDialogConfirmEdit(context);
@@ -112,6 +117,4 @@ class _EditProfileInfoState extends State<EditProfileInfo> {
       });
     }
   }
-
-
 }

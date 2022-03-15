@@ -9,7 +9,7 @@ class ViewTicketInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'عرض التذاكر',
         ),
         centerTitle: true,

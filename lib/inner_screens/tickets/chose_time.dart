@@ -8,6 +8,11 @@ import '../../compponents/calender_events.dart';
 import '../../consts/consts_methods.dart';
 
 class ChoseTime extends StatefulWidget {
+ final DateTime dateTime;
+
+
+   ChoseTime({Key? key,required this.dateTime}) : super(key: key);
+
   @override
   State<ChoseTime> createState() => _ChoseTimeState();
 }
@@ -16,15 +21,24 @@ class _ChoseTimeState extends State<ChoseTime> {
   TextEditingController numOfTiket = TextEditingController(text: '0');
 
   TextEditingController money = TextEditingController();
-DateTime dateTime =DateTime.now();
 
   String dropdownValue = '1';
+
+  dynamic dayData = {
+    "1" : "الاتنين",
+    "2" : "الثلاثاء",
+    "3" : "الاربعاء",
+    "4" : "الخميس",
+    "5" : "الجمعه",
+    "6" : "السبت",
+    "7" : "الاحد" };
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'اختيار التذاكر',
         ),
         centerTitle: true,
@@ -36,7 +50,7 @@ DateTime dateTime =DateTime.now();
             children: [
               SizedBox(
                 width: getSize(context).width,
-                height: 40,
+                height: 10,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,19 +75,24 @@ DateTime dateTime =DateTime.now();
                 ],
               ),
               buildPaddingTitleOfSteps(context),
-              CalenderEvents(getDay: (v) {
-                setState(() {
-                  dateTime =v;
-                });
-                print(v);
-              }),
-              const SizedBox(height: 10),
+              Text( '${widget.dateTime.year}/${widget.dateTime.month}/${widget.dateTime.day}',
+                style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 22
+              ),),
+              Text(dayData['${widget.dateTime.weekday}'], style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22
+              ),),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    const Text('عدد التذاكر'),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 8),
                       decoration: BoxDecoration(
@@ -118,15 +137,15 @@ DateTime dateTime =DateTime.now();
               AuthButton(
                 title: 'الدفع',
                 function: () {
-                  navigate(context, PayInfo(time: dateTime,numOfTicket: dropdownValue,));
+                  navigate(context, PayInfo(time: widget.dateTime,numOfTicket: dropdownValue,));
                 },
                 color: Kmaincolor,
               ),
+              const SizedBox(height: 50,)
             ],
           ),
         ),
       ),
     );
   }
-
 }

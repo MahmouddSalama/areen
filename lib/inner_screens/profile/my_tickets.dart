@@ -3,12 +3,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../consts/consts_methods.dart';
 class MyTickets extends StatelessWidget {
+  dynamic dayData = {
+    "1" : "الاتنين",
+    "2" : "الثلاثاء",
+    "3" : "الاربعاء",
+    "4" : "الخميس",
+    "5" : "الجمعه",
+    "6" : "السبت",
+    "7" : "الاحد" };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'تذاكري',
         ),
         centerTitle: true,
@@ -19,7 +27,6 @@ class MyTickets extends StatelessWidget {
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             try{
               final List docs = snapshot.data!.docs.where((element) =>element['user id']==FirebaseAuth.instance.currentUser!.uid).toList();
-
 
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
@@ -37,34 +44,17 @@ class MyTickets extends StatelessWidget {
                           builder: (context) {
                             return buildAlertDialogTicketInfo(context,date:docs[indx]['date'].toDate() ,num:docs[indx]['numofTickets'] );
                           });
-                    }, title: '${docs[indx]['createdAt'].toDate().year}/${docs[indx]['createdAt'].toDate().month}/${docs[indx]['createdAt'].toDate().day}',
+                    }, title: '${dayData["${docs[indx]['date'].toDate().weekday}"]}',
                         date: '${docs[indx]['date'].toDate().year}/${docs[indx]['date'].toDate().month}/${docs[indx]['date'].toDate().day}');
                   },
                 );
               }
-
             }catch(e){
 
             }
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
       ),
     );
   }
-
-  ListView buildListView() {
-    return ListView.builder(
-      itemCount: 10,
-      itemBuilder: (context, indx) {
-        return buildPaddingTickets(context, function: () {
-          showDialog(
-              context: context,
-              builder: (context) {
-                return buildAlertDialogTicketInfo(context,date: DateTime.now(),num: 7);
-              });
-        }, title: 'الخميس', date: '2/12-2021');
-      },
-    );
-  }
-
 }

@@ -9,8 +9,8 @@ final  title;
  final TextEditingController? textEditingController;
  final TextInputType? textInputType;
 final String? Function(dynamic value) validetor;
-
-   TicketsField({Key? key,required this.title,required this.hint,required this.enable, this.textEditingController, this.textInputType=TextInputType.number,required this.validetor}) : super(key: key);
+final String? Function(dynamic value)? onchang;
+   TicketsField({Key? key,this.onchang, required this.title,required this.hint,required this.enable, this.textEditingController, this.textInputType=TextInputType.number,required this.validetor}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -26,8 +26,7 @@ final String? Function(dynamic value) validetor;
             borderRadius: BorderRadius.circular(8)
           ),
           width: getSize(context).width,
-          height: 50,
-
+          height: 60,
           child: TextFormField(
             validator: (v)=>validetor(v),
             controller: textEditingController,
@@ -42,6 +41,7 @@ final String? Function(dynamic value) validetor;
               ),
               contentPadding: const EdgeInsets.all(5),
               border: InputBorder.none,
+
             ),
           ),
         ),

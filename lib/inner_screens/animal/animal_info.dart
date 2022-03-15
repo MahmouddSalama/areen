@@ -60,7 +60,7 @@ class _AnimalInfoState extends State<AnimalInfo> {
                   buildPaddingAnimalId(context,
                       string: 'الحيوان الذي ادخلت رقمه التعرفي'),
                   Container(
-                    height: getSize(context).height * .6,
+                    //height: getSize(context).height * .6,
                     width: getSize(context).width,
                     decoration: BoxDecoration(
                       color: Colors.white,

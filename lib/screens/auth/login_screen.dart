@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:areen/compponents/text_field.dart';
 import 'package:areen/consts/colors.dart';
 import 'package:areen/consts/consts_methods.dart';
@@ -92,6 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: RegisterTextFiled(
                       title: 'كلمة المرور',
                       textEditingController: pass,
+                      isPass: true,
                       validetor: (v) {
                         if (v.toString().isEmpty) {
                           return 'من فضلك ادخل اميل صحيح';
@@ -168,27 +171,11 @@ class _LoginScreenState extends State<LoginScreen> {
           loading = false;
         });
         if (e.code == 'user-not-found') {
-          error = 'No user found for that email.';
+          error = 'لم يتم العثور على مستخدم لهذا البريد الإلكتروني.';
         } else if (e.code == 'wrong-password') {
-          error = 'Wrong password provided for that user.';
+          error = 'تم توفير كلمة مرور خاطئة لهذا المستخدم.';
         }
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              contentPadding: EdgeInsets.zero,
-                  title: Text('InValid data'),
-                  content: Text(
-                    error,
-                    style: TextStyle(fontSize: 18, color: Colors.red),
-                  ),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('ok'))
-                  ],
-                ));
+        showErrorDialog(error.toString(),context);
       } catch (e) {
         print(e);
       }

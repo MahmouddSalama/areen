@@ -14,13 +14,13 @@ class Tikets extends StatefulWidget {
 }
 
 class _TiketsState extends State<Tikets> {
-
+DateTime dateTime=DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('الاوقات المتاحة',),
+        title: const Text('الاوقات المتاحة',),
         centerTitle: true,
         elevation: 0,
       ),
@@ -28,8 +28,13 @@ class _TiketsState extends State<Tikets> {
         child: Center(
           child:Column(
             children: [
-              SizedBox(height: getSize(context).height*.05),
+              SizedBox(
+                width: getSize(context).width,
+                height: 10,
+              ),
                CalenderEvents(getDay: (v){
+                 dateTime=v;
+                 setState(() {});
                print(v.toString());
                }),
               const SizedBox(height: 20,),
@@ -47,7 +52,7 @@ class _TiketsState extends State<Tikets> {
                             fontWeight: FontWeight.bold
                         ),),
                         Text('ما عدا يوم الجمعه'),
-                        buildContainerTime()
+                        buildContainerTime(text: '9ص -5م')
                       ],
                     ),
                     const SizedBox(width: 20,),
@@ -60,7 +65,7 @@ class _TiketsState extends State<Tikets> {
                             fontWeight: FontWeight.bold
                         ),),
                         const SizedBox(height: 5),
-                        buildContainerTime()
+                        buildContainerTime(text: '1م -5م')
                       ],
                     ),
                   ],
@@ -68,9 +73,10 @@ class _TiketsState extends State<Tikets> {
               ),
               const SizedBox(height: 50,),
               AuthButton(title: 'حجز', function: (){
-                navigate(context, ChoseTime());
+                navigate(context, ChoseTime(dateTime: dateTime,));
                 // go to
-              },color: Kmaincolor)
+              },color: Kmaincolor),
+              SizedBox(height: 50,)
             ],
           ),
         ),

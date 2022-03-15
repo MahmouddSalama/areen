@@ -28,6 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text('مستخدم جديد '),
       ),
       body: Form(
@@ -71,7 +72,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       return 'كلمة المرور يجب ان لا تقل عن سبع حروف';
                     }
                   },
-                  isPass: true),
+                  isPass: true
+                  ),
                   AuthButton(title: 'تسجيل', function: (){
                     _signUp();
                   },color:Kmaincolor,)
@@ -86,7 +88,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   _submit(ctx){
     if(_formKey.currentState!.validate()){
-
       showDialog(context: ctx, builder: (ctx){
         return AlertDialog(
           title:  Text('تم انشاء حسابك بنجاح ',style: styleText(
@@ -145,11 +146,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
           loading = false;
         });
         if (e.code == 'weak-password') {
-          error = 'The password provided is too weak.';
+          error = 'كلمة المرور المقدمة ضعيفة للغاية.';
         } else if (e.code == 'email-already-in-use') {
-          error = 'The account already exists for that email.';
+          error = 'الحساب موجود بالفعل لهذا البريد الإلكتروني.';
         }
-        showErrorDialog('error is${e.toString()}',context);
+        showErrorDialog(error.toString(),context);
       } catch (e) {
         print(e);
       }
