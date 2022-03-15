@@ -1,16 +1,19 @@
-# areen
-
-A new Flutter application.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Areen
+## Areen is the zoo management system ( demo system )
+# users for system
+* tradinal user 
+# usege
+* fireBase as server 
+* flutter as frame work to buiid this project
+* googel map servers
+# Admin function requrment 
+* login 
+* regester 
+* change user info
+* make ticket for the zoo
+* online pay ( not real )
+* play game as a Quiz in animal info 
+* search about animal and it's info
+* select the user position of zoo
+* select the animal positions in zoo 
+* get info for the animal from the mark in map  
