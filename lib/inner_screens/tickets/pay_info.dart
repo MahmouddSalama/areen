@@ -125,12 +125,20 @@ class _PayInfoState extends State<PayInfo> {
                             child: TicketsField(
                               textInputType: TextInputType.datetime,
                               enable: true,
+                              onchang: (v){
+                                if(v.toString().length==2)
+                                  v+='/';
+                                date.text+='/';
+                                setState(() {
+
+                                });
+                              },
                               validetor: (v){
 
-                                if(v.toString().isEmpty||v.toString().length!=5||v.toString()[2]!='/'){
-                                  //if(int.parse(v.toString().substring(3,5))<=int.parse(DateTime.now().year.toString().substring(2,4))){
+                                if((v.toString().isEmpty||v.toString().length!=5||v.toString()[2]!='/')&&(int.parse(v.toString().substring(0,2))>=12&&int.parse(v.toString().substring(3,5))>22)){
+                                    print(int.parse(v.toString().substring(0,2)));
                                     return 'من فضلك ادخل التاريخ صحيح';
-                                  //}
+                                    //
                                 }
                               },
                                 title: '',

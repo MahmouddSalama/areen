@@ -172,7 +172,7 @@ class _GameState extends State<Game> {
         Flexible(
           child: AuthButton(
             title: 'التالي',
-            function: () {
+            function:answer!=0? () {
               if (answer == questions[randomNumber].rightAnswer && num < 4) {
                 randomNumber++;
                 randomNumber = randomNumber % 20;
@@ -184,24 +184,25 @@ class _GameState extends State<Game> {
                 }
                 setState(() {});
               } else {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      return buildAlertDialogAnswers(questions[randomNumber].rImage,'خاطئة', context);
+                    });
                 colorans=Colors.red;
                 randomNumber++;
                 randomNumber = randomNumber % 20;
                 answer = 0;
+                num++;
                 if (num == 4) {
                   Navigator.pop(context);
                   navigate(context, FinshGame());
                 }
                 setState(() {});
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return buildAlertDialogAnswers('خاطئة', context);
-                    });
                 colorans=Colors.green;
                 setState(() {});
               }
-            },
+            }:(){},
             color: Kmaincolor,
           ),
         ),

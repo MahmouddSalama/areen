@@ -7,6 +7,7 @@ class Question {
   final String image3;
   final String image4;
   final int rightAnswer;
+  final String rImage;
 
   Question({
     required this.questionHeader,
@@ -15,6 +16,7 @@ class Question {
     required this.image3,
     required this.image4,
     required this.rightAnswer,
+    required this.rImage,
   });
 }
 
@@ -26,6 +28,7 @@ List<Question> questions = [
       image3: sloth,
       image4: snail,
       rightAnswer: 3,
+    rImage: sloth,
   ),
   Question(
     questionHeader: '-ما هو الحيوان الذي لا يمكنه القفز، والذي يعتبر أيضًا أكبر حيوان ثديي في العالم؟',
@@ -34,6 +37,7 @@ List<Question> questions = [
     image3: dolphin,
     image4: bear,
     rightAnswer: 2,
+    rImage: elephant,
   ),
   Question(
     questionHeader: '-ما هو الحيوان الذي لديه أطول ذيل؟',
@@ -42,6 +46,7 @@ List<Question> questions = [
     image3:elephant,
     image4: chimpanzee,
     rightAnswer: 1,
+    rImage: giraffe,
   ),
   Question(
     questionHeader: '-ما هو الحيوان الذي لا ينام؟',
@@ -50,6 +55,7 @@ List<Question> questions = [
     image3: frog,
     image4: deer,
     rightAnswer: 3,
+    rImage: frog,
   ),
   Question(
     questionHeader: '-ماهي الطيور المعروفة بقدرتها على الطيران للخلف؟',
@@ -58,6 +64,7 @@ List<Question> questions = [
     image3: hummingbird,
     image4: bat,
     rightAnswer: 3,
+    rImage: hummingbird,
   ),
   Question(
     questionHeader: '-ما هو الطائر الذي لا يستطيع تحريك عينيه؟',
@@ -66,6 +73,7 @@ List<Question> questions = [
     image3: owl,
     image4: hummingbird,
     rightAnswer: 3,
+    rImage: owl,
   ),
   Question(
     questionHeader: '-ما هو الحيوان الذي يقوم بغالبية الصيد؟',
@@ -74,6 +82,7 @@ List<Question> questions = [
     image3: tiger1,
     image4: tiger,
     rightAnswer: 3,
+    rImage: tiger1,
   ),
   Question(
     questionHeader: '-ما هو حيوان الذي وُصف وصفًا كاملًا في القرآن الكريم؟',
@@ -82,6 +91,7 @@ List<Question> questions = [
     image3: camel,
     image4: caw,
     rightAnswer: 4,
+    rImage: caw,
   ),
   Question(
     questionHeader: '-ما هو الحيوان الذي لا يشرب الماء ابدًا؟',
@@ -90,6 +100,7 @@ List<Question> questions = [
     image3: kangaroo,
     image4: bee,
     rightAnswer: 3,
+    rImage: kangaroo,
   ),
   Question(
     questionHeader: '-ما هو أكبر حيوان في الكرة الأرضية؟',
@@ -98,6 +109,7 @@ List<Question> questions = [
     image3: giraffe,
     image4: shark,
     rightAnswer: 1,
+    rImage: whale,
   ),
   Question(
     questionHeader: 'ما هو الحيوان الذي تكلم مع نبينا سليمان عليه السلام؟',
@@ -106,6 +118,7 @@ List<Question> questions = [
     image3: wolf,
     image4: hoopoe,
     rightAnswer: 4,
+    rImage: hoopoe,
   ),
   Question(
     questionHeader: 'ما هو الحيوان الذي حُبس في بطنه نبي من أنبياء الله؟',
@@ -114,6 +127,7 @@ List<Question> questions = [
     image3: camel,
     image4: shark,
     rightAnswer: 2,
+    rImage: whale,
   ),
   Question(
     questionHeader: 'ما هو الحيوان الذي يشم من لسانه؟',
@@ -122,6 +136,7 @@ List<Question> questions = [
     image3: dog,
     image4: snake,
     rightAnswer: 1,
+    rImage: frog,
   ),
   Question(
     questionHeader: 'من هو أذكى حيوان على وجه الأرض؟',
@@ -130,6 +145,7 @@ List<Question> questions = [
     image3: chimpanzee,
     image4: wolf,
     rightAnswer: 3,
+    rImage: chimpanzee,
   ),
   Question(
     questionHeader: 'ما هو الحيوان الذي يسمى صوته صهيل؟',
@@ -138,6 +154,7 @@ List<Question> questions = [
     image3: caw,
     image4: lion,
     rightAnswer: 2,
+    rImage: horse,
   ),
   Question(
     questionHeader: 'ما هو الطائر الذي يبيض في عش آخر غير عشِّه؟',
@@ -146,6 +163,7 @@ List<Question> questions = [
     image3: hummingbird,
     image4: frog,
     rightAnswer: 4,
+    rImage: frog,
   ),
   Question(
     questionHeader: 'ما هو الحيوان الذي لا ينام؟',
@@ -154,6 +172,7 @@ List<Question> questions = [
     image3: raven,
     image4: frog,
     rightAnswer: 4,
+    rImage: frog,
   ),
   Question(
     questionHeader: ' ما هو الحيوان الذي يطلق عليه اسم هيثم؟',
@@ -162,6 +181,7 @@ List<Question> questions = [
     image3: hoopoe,
     image4: hummingbird,
     rightAnswer: 2,
+    rImage: eagle,
   ),
   Question(
     questionHeader: 'ما هو أكبر الطيور حجمًا؟',
@@ -170,6 +190,7 @@ List<Question> questions = [
     image3: owl,
     image4: ostrich,
     rightAnswer: 4,
+    rImage: ostrich,
   ),
   Question(
     questionHeader: 'ما هو الحيوان المعروف باسم الغضنفر؟',
@@ -178,5 +199,6 @@ List<Question> questions = [
     image3: tiger1,
     image4: deer,
     rightAnswer: 1,
+    rImage: lion,
   ),
 ];

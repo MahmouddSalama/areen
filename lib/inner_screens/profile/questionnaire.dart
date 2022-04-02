@@ -1,5 +1,7 @@
 import 'package:areen/compponents/auth_button.dart';
 import 'package:areen/compponents/text_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,7 +15,9 @@ class Questionnaire extends StatefulWidget {
 
 class _QuestionnaireState extends State<Questionnaire> {
   int groupValue1 = 0, groupValue2 = 0, groupValue3 = 0;
-
+ bool  loading=false;
+  final age =TextEditingController();
+  final message =TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +37,7 @@ class _QuestionnaireState extends State<Questionnaire> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                 child: RegisterTextFiled(
+                  textEditingController: age,
                   title: 'العمر',
                   validetor: (v) {
                     if (v.toString().isEmpty) {
@@ -68,11 +73,12 @@ class _QuestionnaireState extends State<Questionnaire> {
               ),),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: RegisterTextFiled(title: '', validetor: (v){},lines: 4,textInputType: TextInputType.text,),
+                child: RegisterTextFiled(title: '', validetor: (v){},lines: 4,textInputType: TextInputType.text,textEditingController: message),
               ),
               const  SizedBox(height: 20,),
-              AuthButton(title: 'حفظ', function: (){
+             loading?const Center(child: CircularProgressIndicator()): AuthButton(title: 'حفظ', function: (){
                 //
+               save();
               })
             ],
           ),
@@ -132,5 +138,49 @@ class _QuestionnaireState extends State<Questionnaire> {
         ),
       ],
     );
+  }
+
+  save()async{
+    String error = '';
+    if(int.parse(age.text)>=6&&groupValue1!=0&&groupValue2!=0&&groupValue3!=0){
+      setState(() {
+        loading = true;
+      });
+      try {
+        await FirebaseFirestore.instance
+            .collection('Questionnaire')
+            .doc()
+            .set({
+          'id': FirebaseAuth.instance.currentUser!.uid,
+          'age': int.parse(age.text),
+          'groupValue1':groupValue1,
+          'groupValue2':groupValue2,
+          'groupValue3':groupValue3,
+          'message':message.text,
+          'createdAt': Timestamp.now(),
+        }).then((value) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text('تم ارسال الاستبيان بنجاح'),
+            backgroundColor: Kmaincolor,
+          ));
+          age.text='';
+          message.text='';
+          groupValue1=0;
+          groupValue2=0;
+          groupValue3=0;
+          setState(() {});
+        });
+      } on FirebaseAuthException catch (e) {
+        setState(() {
+          loading = false;
+        });
+        showErrorDialog(error.toString(),context);
+      } catch (e) {
+        print(e);
+      }
+    }
+    setState(() {
+      loading = false;
+    });
   }
 }

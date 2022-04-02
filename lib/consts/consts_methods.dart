@@ -308,10 +308,10 @@ AlertDialog buildAlertDialogTicketInfo(BuildContext context,{required DateTime d
 }
 
  // Daialog of answer
-AlertDialog buildAlertDialogAnswers(title,context) {
+AlertDialog buildAlertDialogAnswers(pass,title,context) {
   return AlertDialog(
     content: Container(
-      height: 100,
+      height: 200,
       alignment: Alignment.center,
       child: Column(
         children: [
@@ -322,6 +322,7 @@ AlertDialog buildAlertDialogAnswers(title,context) {
                 fontWeight: FontWeight.bold,
                 color: Colors.red),
           ),
+          SizedBox(width: 100,height: 100,child: Image.asset(pass,fit: BoxFit.fill,),),
           FloatingActionButton.small(
             onPressed: () {
               Navigator.pop(context);
